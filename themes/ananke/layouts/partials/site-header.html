@@ -1,0 +1,157 @@
+{{ $featured_image := partial "func/GetFeaturedImage.html" . }}
+{{ if $featured_image }}
+  <header class="cover bg-top" style="background-image: url('{{ $featured_image }}');">
+    <div class="{{ .Site.Params.cover_dimming_class | default "bg-black-60" }}">
+      {{ partial "site-navigation.html" .}}
+      <div class="tc-l pv4 pv6-l ph3 ph4-ns">
+        <h1 class="f2 f-subheadline-l fw2 white-90 mb0 lh-title">
+          {{ .Title | default .Site.Title }}
+        </h1>
+        {{ with .Params.description }}
+          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center mt3">
+            {{ . }}
+          </h2>
+        {{ end }}
+      </div>
+    </div>
+  </header>
+{{ else }}
+  <header>
+    <div class="flex flex-column pb3-m pb6-l {{ .Site.Params.background_color_class | default "bg-black" }}">
+      {{ partial "site-navigation.html" . }}
+      <div class="tc-l pv3 ph3 ph4-ns">
+        <h2 style="font-size: 60px; text-align: center;;" class="f5 f-subheadline-l h2-0-margin fw5 light-silver mb0 lh-title">
+          <span style="display: inline-block; max-width: 100%;" class="small-screen-text">
+            <span id="typing-text"></span>
+            <span class="typing-cursor small-cursor"></span>
+          </span>
+        </h2>
+        {{ with .Params.description }}
+          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+            {{ . }}
+          </h2>
+        {{ end }}
+      </div>
+    </div>
+  </header>
+{{ end }}
+
+<style>
+  @media (max-width: 768px) {
+    .small-screen-text {
+      white-space: nowrap;
+      font-size: 30px;
+      line-height: 1.2;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 0;
+    }
+
+    .h2-0-margin {
+      margin-top: 0;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 18px;
+      background-color: white;
+      margin-left: 5px;
+      animation: typing-cursor-animation 1s infinite;
+    }
+    
+    .typing-cursor.small-cursor {
+      width: 5px;
+      height: 25px;
+    }
+  }
+
+  .typing-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 50px;
+    background-color: white;
+    margin-left: 5px;
+    animation: typing-cursor-animation 1s infinite;
+  }
+
+  @keyframes typing-cursor-animation {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+</style>
+
+<!-- Rest of the code -->
+
+<script>
+  // Array of texts to be typed
+  var textsToType = [
+    "Welcome to my blog :D",
+    "I am a reverse engineer",
+    "Check out my lastest posts!",
+    "My socials are at the bottom of this page :)",
+  ];
+
+  // Delay between typing and untyping
+  var typingDelay = 2000;
+  var untypingDelay = 700;
+
+  // Get the element where text will be typed
+  var typingElement = document.getElementById("typing-text");
+
+  // Initialize the index variable
+  var index = 0;
+
+  // Start the typing effect
+  setTimeout(function() {
+    typeText(typingElement, textsToType[index]);
+  }, typingDelay);
+
+  // Type and untype the text
+  function typeText(element, text) {
+    var typingSpeed = 50;
+
+    // Typing animation
+    var typingInterval = setInterval(function() {
+      element.textContent += text.charAt(0);
+      text = text.substring(1);
+
+      if (text === "") {
+        clearInterval(typingInterval);
+        setTimeout(function() {
+          untypeText(element);
+        }, untypingDelay);
+      }
+    }, typingSpeed);
+  }
+
+  // Untype the text
+  function untypeText(element) {
+    var untypingSpeed = 50;
+
+    // Untyping animation
+    var untypingInterval = setInterval(function() {
+      var text = element.textContent;
+      element.textContent = text.substring(0, text.length - 1);
+
+      if (text === "") {
+        clearInterval(untypingInterval);
+        index++;
+        if (index >= textsToType.length) {
+          index = 0;
+        }
+        setTimeout(function() {
+          typeText(element, textsToType[index]);
+        }, typingDelay);
+      }
+    }, untypingSpeed);
+  }
+</script>

@@ -1,0 +1,34 @@
+<nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div style="gap: 20px;" class="flex-l items-center center">
+    <a style="font-weight: 500;" href="{{ .Site.Home.RelPermalink }}" class="f5 fw2 hover-white no-underline white-90 dib">
+      Home
+    </a>
+    <a style="font-weight: 500;" target="_blank" href="https://github.com/shelovesmox" class="f5 fw2 hover-white no-underline white-90 dib nav-item">
+      Github
+    </a>
+    <div class="flex-l items-center">
+      {{ partial "i18nlist.html" . }}
+      {{ if .Site.Menus.main }}
+        <ul class="{{ cond (eq $.Site.Language.LanguageDirection "rtl") "pr0 ml3" "pl0 mr3" }}">
+          {{ range .Site.Menus.main }}
+          <li class="list f5 f4-ns fw4 dib {{ cond (eq $.Site.Language.LanguageDirection "rtl") "pl3" "pr3" }}">
+            <a class="hover-white no-underline white-90" href="{{ .URL }}" title="{{ i18n "pageTitle" . }}">
+              {{ .Name }}
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+      {{ partialCached "social-follow.html" . }}
+    </div>
+  </div>
+</nav>
+
+<style>
+  @media (max-width: 768px) {
+    .nav-item {
+      font-weight: 500;
+      padding-left: 20px;
+    }
+  }
+</style>
