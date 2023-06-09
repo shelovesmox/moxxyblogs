@@ -2,7 +2,7 @@
 title: "Start of My PX Reverse Journey"
 featured_image: "/images/analysis.png"
 date: 2023-06-08T14:09:01-04:00
-draft: true
+draft: false
 ---
 So, I decided to start my RE journey by reverse engineering Perimeter X. Currently, I am working on the site grubhub.com and have also checked out a site called airtable.com. Mind you, I have heard about many anti-bots but never brought myself to actually attempt reversing them. From PX to Cloudflare, Shape, and other services like Akamai and Kasada, they have always interested me. It's from both an egotistical perspective and pure curiosity about how they work and whether I can reverse engineer them to bypass their protections. I have always loved the idea of bypassing security. I'm not sure why. The greatness it is to reverse engineer the anti-bots of multimillion-dollar companies is, at the very least, a very nice feeling.
 
